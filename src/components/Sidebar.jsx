@@ -4,14 +4,13 @@ import {
   HiOutlineHome,
   HiOutlineCog,
   HiOutlineSwitchHorizontal,
-  HiOutlineChartBar
+  HiOutlineChartBar,
 } from 'react-icons/hi';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
-import Dashboard from './Dashboard';
+import { Link } from 'react-router-dom';
 
-const Sidebar = () => {
+const Sidebar = ({ setIsSidebarCollapsed }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true); // Start collapsed
 
   const menuItems = [
     { name: 'Dashboard', icon: HiOutlineHome, color: 'from-violet-600 to-purple-600', path: '/dashboard' },
@@ -20,17 +19,22 @@ const Sidebar = () => {
     { name: 'Report', icon: HiOutlineChartBar, color: 'from-rose-600 to-pink-600' },
   ];
 
+  // Handle sidebar collapse
+  const handleCollapse = (collapsed) => {
+    setIsCollapsed(collapsed);
+    setIsSidebarCollapsed(collapsed);
+  };
+
   return (
-    <div className="flex min-h-screen font-sans antialiased">
+    <>
       {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 bg-gray-900/95 text-white 
-          transition-all duration-300 ease-in-out shadow-lg border-r border-gray-800/20
-          backdrop-blur-2xl ${isCollapsed ? 'w-14 md:w-16' : 'w-56 md:w-60'} 
+        className={`bg-gray-900/95 text-white transition-all duration-300 ease-in-out shadow-lg border-r border-gray-800/20
+          backdrop-blur-2xl ${isCollapsed ? 'w-16' : 'w-60'} 
           ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
-          md:translate-x-0`}
-        onMouseEnter={() => setIsCollapsed(false)}
-        onMouseLeave={() => setIsCollapsed(true)}
+          md:translate-x-0 md:min-h-screen z-50 fixed top-0 left-0 h-full`}
+        onMouseEnter={() => handleCollapse(false)}
+        onMouseLeave={() => handleCollapse(true)}
       >
         {/* Logo Section */}
         <div className="relative flex items-center justify-between p-3 border-b border-gray-800/40">
@@ -65,7 +69,7 @@ const Sidebar = () => {
           {menuItems.map((item) => (
             <Link
               key={item.name}
-              to={item.path || "#"} // Navigate to the defined path
+              to={item.path || '/dashboard'}
               className="relative flex items-center py-2.5 px-2 rounded-md text-gray-200 
                 hover:bg-gray-800/90 group transition-all duration-300 overflow-hidden shadow-sm"
             >
@@ -116,7 +120,7 @@ const Sidebar = () => {
             animate-gradient-x" />
         </div>
       )}
-    </div>
+    </>
   );
 };
 
