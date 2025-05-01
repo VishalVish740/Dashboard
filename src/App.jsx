@@ -5,6 +5,7 @@ import Dashboard from './components/Dashboard';
 import Master from './components/Master/Master';
 import Category from './components/Master/CategoryMaster/Category';
 import CrudForm from './components/GlobalFunction/CrudForm';
+import CustomerDetails from './components/CustomerDetails';
 
 const App = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
@@ -32,6 +33,10 @@ const App = () => {
             <Route
               path="/crud"
               element={<CrudForm />}
+            />
+            <Route
+              path="/customerdetails"
+              element={<CustomerDetails />}
             />
           </Routes>
         </main>
