@@ -5,7 +5,8 @@ import Dashboard from './components/Dashboard';
 import Master from './components/Master/Master';
 import Category from './components/Master/CategoryMaster/Category';
 import CrudForm from './components/GlobalFunction/CrudForm';
-import CustomerDetails from './components/CustomerDetails';
+import SalesInvoice from './components/Transactions/SalesInvoice';
+import TransactionPage from './components/Transactions/TransactionMain';
 
 const App = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
@@ -14,11 +15,9 @@ const App = () => {
 
   return (
     <Router>
-      <div className="flex min-h-screen">
+      <div className="flex h-screen">
         <Sidebar setIsSidebarCollapsed={setIsSidebarCollapsed} />
-        <main
-          className={`flex-1 p-6 overflow-y-auto ${isSidebarCollapsed ? 'ml-16' : 'ml-60'}`}
-        >
+        <main className={`flex-1 p-6 ${isSidebarCollapsed ? 'ml-16' : 'ml-60'}`}>
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/dashboard" element={<Dashboard />} />
@@ -30,14 +29,8 @@ const App = () => {
               path="/master/category"
               element={<Category isVisible={true} masterData={masterData} setMasterData={setMasterData} setLoading={setLoading} />}
             />
-            <Route
-              path="/crud"
-              element={<CrudForm />}
-            />
-            <Route
-              path="/customerdetails"
-              element={<CustomerDetails />}
-            />
+            <Route path="/salesinvoice" element={<SalesInvoice />} />
+            <Route path="/transactionpage" element={<TransactionPage />} />
           </Routes>
         </main>
       </div>

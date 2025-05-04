@@ -161,7 +161,7 @@ const Dashboard = () => {
             <Link to="/master"> {/* Updated link */}
               <DashboardCard type="master" data={{ masterData, loading }} />
             </Link>
-            <Link to="/category">
+            <Link to="/transactionpage">
               <DashboardCard type="transaction" data={{}} />
             </Link>
             <Link to="/category">
